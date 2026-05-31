@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scoring core tests</title>
+<script src="scoring.js"></script>
+</head>
+<body>
+<pre id="out">running...</pre>
+<script>
+(function () {
+  var S = window.FFScoring;
+  var out = document.getElementById("out");
+  var passed = 0, failed = 0, log = [];
+  function assert(cond, msg) {
+    if (cond) { passed++; }
+    else { failed++; log.push("FAIL: " + msg); console.error("FAIL: " + msg); }
+  }
+  var N = S.QUESTIONS.length;
+  function fill(pts) {
+    var a = []; for (var i = 0; i < N; i++) a.push({ points: pts, dim: S.QUESTIONS[i].dim }); return a;
+  }
+
+  var lowest = S.scoreAssessment(fill(0), "honest");
+  assert(lowest.composite === 0, "all-zero answers score 0");
+  assert(lowest.band.key === "adrenaline", "all-zero lands in Running on Adrenaline");
+  assert(!lowest.capped, "honest low score is not capped");
+
+  var perfect = S.scoreAssessment(fill(3), "honest");
+  assert(perfect.composite === 100, "all-three answers score 100");
+  assert(perfect.monoculture === true, "all-three triggers monoculture flag");
+  assert(perfect.capped === true, "monoculture sweep is capped");
+  assert(perfect.band.key === "rhythm", "capped CEO falls to Finding the Rhythm");
+
+  var genuineHigh = [3,3,3,3,3,3,2,2].map(function (p, i) { return { points: p, dim: S.QUESTIONS[i].dim }; });
+  var gh = S.scoreAssessment(genuineHigh, "honest");
+  assert(gh.monoculture === false, "6-of-8 top answers is not a monoculture sweep");
+  assert(gh.band.key === "ceo", "genuine high scorer reaches CEO uncapped");
+  assert(!gh.capped, "genuine high scorer is not capped");
+
+  var mid = S.scoreAssessment(fill(2), "honest");
+  assert(mid.composite === 67, "all-two answers score 67");
+  assert(mid.band.key === "rhythm", "all-two lands in Finding the Rhythm");
+
+  var driftCap = S.scoreAssessment(genuineHigh, "ideal");
+  assert(driftCap.capped === true, "drift=ideal caps a top-band result");
+  assert(driftCap.band.key === "rhythm", "drift cap drops CEO to Finding the Rhythm");
+  assert(driftCap.reasons.driftIdeal === true, "drift reason is recorded");
+
+  var driftLow = S.scoreAssessment(fill(0), "ideal");
+  assert(driftLow.capped === false, "drift cap does not touch a bottom band");
+
+  var gapAnswers = S.QUESTIONS.map(function (q) { return { points: q.dim === "recovery" ? 0 : 3, dim: q.dim }; });
+  var gapRes = S.scoreAssessment(gapAnswers, "honest");
+  assert(gapRes.gap.key === "recovery", "lowest dimension is identified as the gap");
+  assert(gapRes.dimensions.length === 4, "four dimensions returned");
+
+  // prescription mapping: gap dimension -> matched playbook
+  assert(S.prescribePlaybook("regulation").key === "selfcompassion", "regulation gap prescribes the self-compassion workbook");
+  assert(S.prescribePlaybook("recovery").key === "selfcompassion", "recovery gap prescribes the self-compassion workbook");
+  assert(S.prescribePlaybook("focus").key === "productivity", "focus gap prescribes the productivity playbook");
+  assert(S.prescribePlaybook("alignment").key === "productivity", "direction gap prescribes the productivity playbook");
+
+  // every dimension has a gap insight with the parts the result needs
+  ["focus", "regulation", "recovery", "alignment"].forEach(function (k) {
+    var gi = S.gapInsight(k);
+    assert(gi && gi.concept && gi.detail && gi.seriesStart, "gap insight exists for " + k);
+  });
+  assert(S.gapInsight("nope") === null, "unknown gap key returns null insight");
+
+  var threw = false;
+  try { S.scoreAssessment([1,2,3], "honest"); } catch (e) { threw = true; }
+  assert(threw, "wrong answer count throws");
+  threw = false;
+  try { S.scoreAssessment(fill(9), "honest"); } catch (e) { threw = true; }
+  assert(threw, "out-of-range points throw");
+
+  var summary = (failed === 0)
+    ? ("ok - " + passed + " assertions passed")
+    : (failed + " FAILED, " + passed + " passed\n" + log.join("\n"));
+  out.textContent = summary;
+  window.__TEST_RESULT__ = { passed: passed, failed: failed, summary: summary };
+  console.log(summary);
+})();
+</script>
+</body>
+</html>

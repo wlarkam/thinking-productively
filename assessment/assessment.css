@@ -1,0 +1,581 @@
+/* ============================================================
+   FOCUS & FLOW READINESS ASSESSMENT — page styles
+   Inherits ALL design tokens from ../styles.css (loaded first).
+   This file declares NO :root tokens. It only consumes them.
+   ============================================================ */
+
+/* ---- Intro header --------------------------------------- */
+.assess-intro { text-align: center; padding-top: 64px; padding-bottom: 8px; }
+.assess-intro .eyebrow { margin-bottom: 18px; }
+.assess-intro__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--enlightened);
+  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 auto 20px;
+  max-width: 16ch;
+}
+.assess-intro__lead {
+  font-size: 1.3125rem;
+  line-height: 1.5;
+  color: var(--fg2);
+  max-width: 58ch;
+  margin: 0 auto 14px;
+}
+.assess-intro__meta {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  color: var(--fg3);
+}
+
+/* ---- The card (holds question / result states) ---------- */
+.assess {
+  padding-bottom: 110px;
+  min-height: 60vh;
+}
+.assess__card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  max-width: 760px;
+  margin: 40px auto 0;
+  padding: 44px;
+}
+
+/* Intro state: evenly spaced, centered group inside the card padding. */
+.assess__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.assess__intro .assess__body { margin: 0 0 32px; }
+
+/* Calm blur-to-focus transition between steps (brand motion). */
+.assess__stage { animation: assessIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes assessIn {
+  from { opacity: 0; transform: translateY(10px); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .assess__stage { animation: none; }
+}
+
+/* ---- Progress ------------------------------------------- */
+.assess__progress { margin-bottom: 30px; }
+.assess__progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  color: var(--fg3);
+  margin-bottom: 10px;
+}
+.assess__progress-meta .assess__dim { color: var(--accent); }
+.assess__bar {
+  height: 3px;
+  background: var(--hairline);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.assess__bar-fill {
+  height: 100%;
+  background: var(--courtside);
+  border-radius: var(--r-pill);
+  width: 0;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Question ------------------------------------------- */
+.assess__q {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--enlightened);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 28px;
+}
+.assess__options { display: flex; flex-direction: column; gap: 12px; }
+.assess__option {
+  text-align: left;
+  width: 100%;
+  background: rgba(228, 226, 212, 0.03);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  color: var(--fg2);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  padding: 17px 20px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.12s ease;
+}
+.assess__option:hover {
+  border-color: var(--hairline-strong);
+  background: rgba(228, 226, 212, 0.06);
+}
+.assess__option:focus-visible {
+  outline: 2px solid var(--courtside);
+  outline-offset: 2px;
+}
+.assess__option.is-picked {
+  border-color: var(--courtside);
+  background: rgba(227, 72, 46, 0.10);
+  color: var(--enlightened);
+}
+
+/* ---- Nav between questions ------------------------------ */
+.assess__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 26px;
+  min-height: 24px;
+}
+.assess__back {
+  background: none;
+  border: 0;
+  color: var(--fg3);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 6px 2px;
+  visibility: hidden;
+}
+.assess__back.is-shown { visibility: visible; }
+.assess__back:hover { color: var(--enlightened); }
+.assess__hint {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  color: var(--fg3);
+}
+
+/* The honesty / drift step gets a quieter, confiding tone. */
+.assess__drift-note {
+  font-size: 15px;
+  color: var(--fg3);
+  margin: 0 0 22px;
+  max-width: 54ch;
+}
+
+/* ---- Result --------------------------------------------- */
+.assess__result-eyebrow { margin-bottom: 14px; text-align: center; }
+.assess__band {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--enlightened);
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0 0 12px;
+}
+.assess__band .italic { font-style: italic; color: var(--courtside); }
+.assess__summary {
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--fg2);
+  margin: 0 auto 26px;
+  max-width: 40ch;
+}
+
+/* Readiness meter */
+.assess__meter { margin: 30px 0 8px; }
+.assess__meter-track {
+  position: relative;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg,
+    var(--courtside) 0%,
+    var(--grounded) 50%,
+    var(--turf-300, #6f8a5e) 100%);
+  opacity: 0.85;
+}
+.assess__meter-marker {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--enlightened);
+  border: 3px solid var(--deep-flow);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transform: translate(-50%, -50%);
+  transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.assess__meter-scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10.5px;
+  color: var(--fg3);
+  margin-top: 12px;
+}
+.assess__meter-scale span { flex: 1; text-align: center; }
+.assess__meter-scale span:first-child { text-align: left; }
+.assess__meter-scale span:last-child { text-align: right; }
+.assess__meter-scale .is-current { color: var(--accent); }
+
+.assess__body {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--fg2);
+  max-width: 56ch;
+  margin: 26px auto 0;
+  text-align: center;
+}
+
+/* Idealized / capped caveat */
+.assess__caveat {
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--courtside);
+  background: rgba(227, 72, 46, 0.06);
+  border-radius: var(--r-sm);
+  padding: 14px 18px;
+  font-size: 15px;
+  color: var(--fg2);
+  margin: 24px auto 0;
+  max-width: 56ch;
+}
+.assess__caveat strong { color: var(--enlightened); }
+
+/* Dimension map */
+.assess__dims { margin: 38px 0 8px; }
+.assess__dims-head {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  color: var(--fg3);
+  text-align: center;
+  margin: 0 0 22px;
+}
+.assess__dim-row { margin-bottom: 18px; }
+.assess__dim-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 7px;
+}
+.assess__dim-name { font-size: 15px; color: var(--fg1); }
+.assess__dim-name .assess__gap-tag {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10px;
+  color: var(--accent);
+  margin-left: 8px;
+}
+.assess__dim-pct { font-family: var(--font-mono); font-size: 13px; color: var(--fg3); }
+.assess__dim-track {
+  height: 7px;
+  background: var(--hairline);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.assess__dim-meter {
+  height: 100%;
+  background: var(--enlightened);
+  border-radius: var(--r-pill);
+  width: 0;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.assess__dim-row.is-gap .assess__dim-meter { background: var(--courtside); }
+
+/* ---- Flow Signature radar (interactive 3D instrument) --- */
+.assess__radar {
+  perspective: 1150px;
+  margin: 10px auto 6px;
+  max-width: 460px;
+  cursor: grab;
+  touch-action: pan-y; /* allow page scroll on touch; drag is pointer-based */
+}
+.assess__radar.is-grabbing { cursor: grabbing; }
+/* The rotor holds all depth layers and is what we rotate in 3D.
+   Idle: a slow compositor-driven orbit (no JS needed, so it is alive
+   even where rAF is throttled). Paused while the pointer is active. */
+.assess__radar-rotor {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: radarIdle 15s ease-in-out infinite;
+  will-change: transform;
+}
+/* IMPORTANT: a running animation (even paused) overrides inline transform,
+   so we must REMOVE it (not just pause) while the pointer drives the rotor. */
+.assess__radar.is-active .assess__radar-rotor { animation: none; }
+.assess__radar.is-grabbing .assess__radar-rotor { transition: none; } /* 1:1 drag */
+@keyframes radarIdle {
+  0%   { transform: rotateX(9deg) rotateY(-13deg); }
+  50%  { transform: rotateX(11deg) rotateY(13deg); }
+  100% { transform: rotateX(9deg) rotateY(-13deg); }
+}
+
+/* Depth layers — stacked planes at increasing translateZ so rotating
+   the rotor reveals real parallax between grid, labels, and signature. */
+.assess__radar-layer { width: 100%; height: auto; display: block; }
+.assess__radar-layer.is-grid { position: relative; transform: translateZ(0); }   /* in flow: sizes the box */
+.assess__radar-layer.is-labels { position: absolute; top: 0; left: 0; transform: translateZ(26px); }
+.assess__radar-layer.is-data { position: absolute; top: 0; left: 0; transform: translateZ(52px); }
+
+.assess__radar-grid polygon { fill: none; stroke: var(--hairline); stroke-width: 1; }
+.assess__radar-grid polygon.is-outer { stroke: var(--hairline-strong); }
+.assess__radar-grid line { stroke: var(--hairline); stroke-width: 1; }
+.assess__radar-area {
+  fill: rgba(227, 72, 46, 0.16);
+  stroke: var(--courtside);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.assess__radar-vert {
+  fill: var(--enlightened);
+  stroke: var(--deep-flow);
+  stroke-width: 2;
+}
+.assess__radar-vert.is-gap { fill: var(--courtside); }
+.assess__radar-axis-name {
+  font-family: var(--font-mono);
+  fill: var(--fg3);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+.assess__radar-axis-pct {
+  font-family: var(--font-mono);
+  fill: var(--fg1);
+  font-size: 13.5px;
+}
+.assess__radar-axis.is-gap .assess__radar-axis-name,
+.assess__radar-axis.is-gap .assess__radar-axis-pct { fill: var(--accent); }
+.assess__radar-gap {
+  text-align: center;
+  font-size: 15px;
+  color: var(--fg2);
+  margin: 12px auto 0;
+  max-width: 48ch;
+}
+.assess__radar-gap strong { color: var(--enlightened); font-weight: 500; }
+.assess__radar-hint {
+  text-align: center;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 10.5px;
+  color: var(--fg3);
+  margin: 8px 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .assess__radar-rotor { animation: none; transition: none; transform: rotateX(6deg) rotateY(0deg); }
+  .assess__radar { cursor: default; }
+  .assess__radar-hint { display: none; }
+}
+
+/* CTA block on the result */
+.assess__cta {
+  margin: 40px auto 0;
+  padding: 30px 28px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  background: rgba(37, 59, 30, 0.35); /* faint turf wash */
+  text-align: center;
+}
+.assess__cta-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--enlightened);
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+.assess__cta-sub { font-size: 15px; color: var(--fg2); margin: 0 auto 20px; max-width: 50ch; }
+.assess__cta-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.assess__btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: var(--r-pill);
+  padding: 13px 26px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: filter 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+.assess__btn--primary { background: var(--courtside); color: var(--enlightened); }
+.assess__btn--primary:hover { filter: brightness(1.08); }
+.assess__btn--ghost {
+  background: transparent;
+  color: var(--enlightened);
+  border-color: var(--hairline-strong);
+}
+.assess__btn--ghost:hover { border-color: var(--courtside); background: rgba(227,72,46,0.08); }
+
+/* Demo email capture inside the result (sample only) */
+.assess__optin { margin: 28px auto 0; max-width: 520px; }
+.assess__optin-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  color: var(--fg3);
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+/* ---- FlowRx prescription (matched playbook + opt-in) ---- */
+.assess__rx { margin: 40px auto 0; max-width: 640px; }
+.assess__rx-eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  color: var(--accent);
+  text-align: center;
+  margin: 0 0 14px;
+}
+.assess__rx-card {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  padding: 26px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+.assess__rx-cover {
+  width: 150px;
+  flex: none;
+  align-self: flex-start;
+}
+.assess__rx-cover img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--hairline);
+}
+.assess__rx-body { flex: 1; min-width: 0; }
+.assess__rx-kicker {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10.5px;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+.assess__rx-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1.15;
+  color: var(--enlightened);
+  margin: 0 0 8px;
+}
+.assess__rx-desc { font-size: 14.5px; color: var(--fg2); margin: 0 0 16px; }
+.assess__rx-desc strong { color: var(--enlightened); font-weight: 500; }
+.assess__rx .email-form { max-width: none; }
+.assess__rx-dl { color: var(--accent); text-decoration: underline; white-space: nowrap; }
+.assess__rx-cover-cap {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 9.5px;
+  color: var(--accent);
+  text-align: center;
+  margin: 8px 0 0;
+}
+.assess__rx .assess__consent { text-align: left; margin: 12px 0 0; }
+
+/* gap insight: names the concept to train (from the playbooks) */
+.assess__insight { max-width: 58ch; margin: 22px auto 0; text-align: center; }
+.assess__insight-head {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 10.5px;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+.assess__insight-body { font-size: 15.5px; color: var(--fg2); line-height: 1.6; margin: 0; }
+.assess__insight-body strong { color: var(--enlightened); font-weight: 500; }
+
+/* secondary (Group) CTA: lighter than the primary series card */
+.assess__cta--secondary { background: transparent; }
+.assess__cta--secondary .assess__cta-title { font-size: 1.25rem; }
+@media (max-width: 560px) {
+  .assess__rx-card { flex-direction: column; align-items: center; text-align: center; }
+  .assess__rx-cover { width: 170px; align-self: center; }
+  .assess__rx .assess__consent { text-align: center; }
+}
+.assess__consent {
+  font-size: 12.5px;
+  color: var(--fg3);
+  text-align: center;
+  margin: 12px auto 0;
+  max-width: 46ch;
+  line-height: 1.5;
+}
+
+.assess__retake {
+  display: block;
+  margin: 34px auto 0;
+  background: none;
+  border: 0;
+  color: var(--fg3);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  cursor: pointer;
+}
+.assess__retake:hover { color: var(--enlightened); }
+
+/* Start button on the intro state */
+.assess__start {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  background: var(--courtside);
+  color: var(--enlightened);
+  border: 0;
+  border-radius: var(--r-pill);
+  padding: 15px 38px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.assess__start:hover { filter: brightness(1.08); }
+.assess__start-meta {
+  display: block;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11.5px;
+  color: var(--fg3);
+  margin-top: 16px;
+}
+
+@media (max-width: 640px) {
+  .assess__card { padding: 26px; margin-top: 28px; }
+  .assess-intro { padding-top: 44px; }
+}

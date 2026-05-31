@@ -1,0 +1,12 @@
+# OS / tooling
+.DS_Store
+.claude/
+node_modules/
+.vercel/
+
+# Internal design handoff: client brand book + chat logs (not for public repo)
+design_handoff/
+
+# Lead-magnet source PDFs: delivered via the email series, kept out of the
+# public repo so they stay gated behind the opt-in (covers are published).
+assets/DrBH-*.pdf
