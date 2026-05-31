@@ -372,37 +372,53 @@ a { color: var(--fg1); text-underline-offset: 3px; }
   margin: 18px 0 20px;
 }
 .curriculum__intro p { font-size: 16px; line-height: 1.6; color: var(--fg2); margin: 0 auto; max-width: 48ch; }
-.curriculum__list { max-width: 620px; margin: 0 auto; }
-.curriculum__item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
-  padding: 24px 0;
-  border-top: 1px solid var(--hairline);
+/* Sticky "stacking cards" — all 12 days pile up as you scroll */
+.curriculum__stack { --stack-top: 96px; --peek: 52px; max-width: 600px; margin: 0 auto; padding-bottom: 40vh; }
+.daycard {
+  position: sticky;
+  top: calc(var(--stack-top) + var(--i) * var(--peek));
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.38);
+  min-height: 180px;
+  overflow: hidden;
 }
-.curriculum__item:first-child { border-top: none; }
-.curriculum__item-num {
+.daycard__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 26px;
+  min-height: var(--peek);
+}
+.daycard__num {
+  flex: none;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   color: var(--courtside);
 }
-.curriculum__item h3 {
+.daycard__title {
   font-family: var(--font-display);
-  font-size: 23px;
+  font-size: 21px;
+  line-height: 1.1;
   color: var(--enlightened);
   margin: 0;
 }
-.curriculum__item p { font-size: 15px; line-height: 1.55; color: var(--fg2); margin: 0; }
-.curriculum__more {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--fg3);
-  margin-top: 22px;
-  text-align: center;
+.daycard__desc {
+  margin: 0;
+  padding: 12px 26px 26px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--fg2);
+}
+@media (max-width: 640px) {
+  .curriculum__stack { --stack-top: 72px; --peek: 44px; max-width: 100%; padding-bottom: 36vh; }
+  .daycard { min-height: 150px; }
+  .daycard__head { padding: 0 18px; gap: 10px; }
+  .daycard__num { font-size: 10px; }
+  .daycard__title { font-size: 15.5px; white-space: nowrap; }
+  .daycard__desc { padding: 12px 18px 22px; font-size: 14.5px; }
 }
 
 /* ============================================================
