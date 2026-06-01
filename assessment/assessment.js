@@ -442,7 +442,7 @@
 
     var body = el("div", "assess__rx-body");
     body.appendChild(el("p", "assess__rx-kicker", "FREE · 8-DAY EMAIL SERIES"));
-    body.appendChild(el("h3", "assess__rx-title", "Start where it matters most."));
+    body.appendChild(el("h3", "assess__rx-title", "Start where you need it most."));
     body.appendChild(el("p", "assess__rx-desc",
       "One short, practical email a day from Dr. Hogarth. Yours begins with " + esc(startPhrase) +
       ". You will get the <strong>" + esc(pb.title) + "</strong> as your welcome gift on day one."));

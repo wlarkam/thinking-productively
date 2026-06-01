@@ -47,7 +47,7 @@
     },
     {
       dim: "regulation",
-      prompt: "A deadline slips and someone who matters is frustrated with you. In your body, what happens?",
+      prompt: "A deadline slips and someone important to you is frustrated. In your body, what happens?",
       options: [
         { points: 0, text: "The inner critic gets loud. I tear into myself, then bury it under more work." },
         { points: 1, text: "I replay the conversation for hours. I cannot put it down, and it leaks into everything else." },
@@ -57,7 +57,7 @@
     },
     {
       dim: "recovery",
-      prompt: "It is 10:47pm and tomorrow matters. What is the honest scene?",
+      prompt: "It is 10:47pm and tomorrow is a big one. What is the honest scene?",
       options: [
         { points: 0, text: "Still going. Rest feels like falling behind, and there is always one more thing." },
         { points: 1, text: "In bed, on my phone, telling myself five more minutes for the last hour." },
@@ -70,7 +70,7 @@
       prompt: "Look at last week. The hours you spent: who chose them?",
       options: [
         { points: 0, text: "Whoever shouted loudest. The urgent ran the week, and the important never got a look in." },
-        { points: 1, text: "A blur. I was busy, but I would struggle to tell you what actually mattered." },
+        { points: 1, text: "A blur. I was busy, but I could not tell you what any of it added up to." },
         { points: 2, text: "Mostly mine, with some drift. I can tell the important from the merely urgent, most days." },
         { points: 3, text: "Me. The important work got the prime hours, and the urgent waited its turn." }
       ]
@@ -87,7 +87,7 @@
     },
     {
       dim: "regulation",
-      prompt: "You fall short on something that matters to you. What is the story you tell yourself?",
+      prompt: "You fall short on something you care about. What is the story you tell yourself?",
       options: [
         { points: 0, text: "That something is wrong with me. Everyone else seems to have this handled." },
         { points: 1, text: "I go quiet, drop my head, and grind alone until I have fixed it." },
@@ -111,7 +111,7 @@
       options: [
         { points: 0, text: "Rarely. I am productive and still feel like I am running from something." },
         { points: 1, text: "Hit and miss. Some days land, most just happen to me." },
-        { points: 2, text: "More often than not. I can usually point to something that mattered." },
+        { points: 2, text: "More often than not. I can usually point to something worthwhile." },
         { points: 3, text: "Most days. I am building toward something I chose, and I can feel it." }
       ]
     }
@@ -121,7 +121,7 @@
      Not scored into the composite. Detects the domain's known
      failure mode (aspirational self-report) and caps the band. */
   var DRIFT_QUESTION = {
-    prompt: "Last thing, and it matters. When you answered, what were you describing?",
+    prompt: "Last thing, and be honest. When you answered, what were you describing?",
     options: [
       { id: "honest", text: "My honest last couple of weeks.", cap: false },
       { id: "between", text: "Somewhere between my real and my ideal.", cap: false },
@@ -144,7 +144,7 @@
       name: "Scattered Focus",
       min: 38, max: 59,
       summary: "Capable, but pulled in a dozen directions.",
-      body: "The talent shows up. Attention is what keeps slipping. Task initiation is a daily negotiation, distraction wins more rounds than you would like, and the day tends to run you. What looks like a discipline problem is usually an untrained skill. The Group gives you the structure, and the self-regulation, to aim that capacity at what matters.",
+      body: "The talent shows up. Attention is what keeps slipping. Task initiation is a daily negotiation, distraction wins more rounds than you would like, and the day tends to run you. What looks like a discipline problem is usually an untrained skill. The Group gives you the structure, and the self-regulation, to aim that capacity at the work worth doing.",
       fit: "high"
     },
     {
@@ -317,7 +317,7 @@
     alignment: {
       concept: "the important over the merely urgent",
       detail: "Your hours go to whatever shouts loudest. Sorting the genuinely important from the merely urgent is what puts your values back in the driver's seat.",
-      seriesStart: "anchoring your attention to what actually matters"
+      seriesStart: "anchoring your attention to your real priorities"
     }
   };
   function gapInsight(gapKey) { return GAP_INSIGHTS[gapKey] || null; }
