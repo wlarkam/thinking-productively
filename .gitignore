@@ -7,6 +7,7 @@ node_modules/
 # Internal design handoff: client brand book + chat logs (not for public repo)
 design_handoff/
 
-# Lead-magnet source PDFs: delivered via the email series, kept out of the
-# public repo so they stay gated behind the opt-in (covers are published).
-assets/DrBH-*.pdf
+# PDFs in assets are private: lead-magnet sources (gated behind the opt-in)
+# and internal brand/positioning docs (e.g. the Style Guide). Covers (PNGs)
+# are published; the source PDFs are not.
+assets/*.pdf

@@ -173,7 +173,7 @@
 
   /* ---- RESULT --------------------------------------------- */
   function ctaForFit(fit, band) {
-    var group = "https://www.brenthogarth.com/focus-course";
+    var group = "https://www.brenthogarth.com/focus-group";
     if (fit === "high") {
       return {
         title: "When you are ready to go deeper.",
