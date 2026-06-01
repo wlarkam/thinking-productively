@@ -338,12 +338,13 @@ a { color: var(--fg1); text-underline-offset: 3px; }
 }
 .method__outcome {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
+  line-height: 1.5;
   color: var(--fg2);
-  margin: 36px auto 0;
+  margin: 40px auto 0;
   max-width: 46ch;
 }
-.method__outcome .accent { color: var(--courtside); }
+.method__outcome .accent { color: var(--courtside); font-size: 1.6em; }
 .stage {
   border-top: 1px solid var(--hairline-strong);
   padding-top: 24px;
