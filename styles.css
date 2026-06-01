@@ -380,8 +380,8 @@ a { color: var(--fg1); text-underline-offset: 3px; }
   margin: 18px 0 20px;
 }
 .curriculum__intro p { font-size: 16px; line-height: 1.6; color: var(--fg2); margin: 0 auto; max-width: 48ch; }
-/* Sticky "stacking cards" — all 12 days pile up as you scroll */
-.curriculum__stack { --stack-top: 96px; --peek: 52px; max-width: 600px; margin: 0 auto; padding-bottom: 40vh; }
+/* Sticky "stacking cards" — the 8 sessions pile up as you scroll */
+.curriculum__stack { --stack-top: 92px; --peek: 56px; max-width: 600px; margin: 0 auto; padding-bottom: 46vh; }
 .daycard {
   position: sticky;
   top: calc(var(--stack-top) + var(--i) * var(--peek));
@@ -408,8 +408,8 @@ a { color: var(--fg1); text-underline-offset: 3px; }
 }
 .daycard__title {
   font-family: var(--font-display);
-  font-size: 21px;
-  line-height: 1.1;
+  font-size: 19px;
+  line-height: 1.14;
   color: var(--enlightened);
   margin: 0;
 }
@@ -421,11 +421,11 @@ a { color: var(--fg1); text-underline-offset: 3px; }
   color: var(--fg2);
 }
 @media (max-width: 640px) {
-  .curriculum__stack { --stack-top: 72px; --peek: 44px; max-width: 100%; padding-bottom: 36vh; }
-  .daycard { min-height: 150px; }
+  .curriculum__stack { --stack-top: 72px; --peek: 62px; max-width: 100%; padding-bottom: 46vh; }
+  .daycard { min-height: 156px; }
   .daycard__head { padding: 0 18px; gap: 10px; }
   .daycard__num { font-size: 10px; }
-  .daycard__title { font-size: 15.5px; white-space: nowrap; }
+  .daycard__title { font-size: 15px; }
   .daycard__desc { padding: 12px 18px 22px; font-size: 14.5px; }
 }
 
