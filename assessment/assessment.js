@@ -249,7 +249,7 @@
       wrap.appendChild(ins);
     }
 
-    // primary next step: start the free 12-day series (with playbook bonus)
+    // primary next step: start the free 8-day series (with playbook bonus)
     wrap.appendChild(buildSeriesCard(S.prescribePlaybook(res.gap.key), gi));
 
     // secondary: the Group, when they are ready to go deeper
@@ -416,7 +416,7 @@
     return { node: box, animate: animate };
   }
 
-  /* ---- the next step: start the free 12-day series --------
+  /* ---- the next step: start the free 8-day series --------
      The email capture starts the personalized series (the real
      nurture engine into the Group). The matched playbook rides
      along as the welcome gift, so the playbooks reinforce the
@@ -441,7 +441,7 @@
     card.appendChild(coverWrap);
 
     var body = el("div", "assess__rx-body");
-    body.appendChild(el("p", "assess__rx-kicker", "FREE · 12-DAY EMAIL SERIES"));
+    body.appendChild(el("p", "assess__rx-kicker", "FREE · 8-DAY EMAIL SERIES"));
     body.appendChild(el("h3", "assess__rx-title", "Start where it matters most."));
     body.appendChild(el("p", "assess__rx-desc",
       "One short, practical email a day from Dr. Hogarth. Yours begins with " + esc(startPhrase) +
