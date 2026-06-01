@@ -342,9 +342,11 @@ a { color: var(--fg1); text-underline-offset: 3px; }
   line-height: 1.5;
   color: var(--fg2);
   margin: 40px auto 0;
-  max-width: 46ch;
+  max-width: none;
 }
 .method__outcome .accent { color: var(--courtside); font-size: 1.6em; }
+/* one line on desktop/tablet; wraps only on narrow phones */
+@media (min-width: 680px) { .method__outcome { white-space: nowrap; } }
 .stage {
   border-top: 1px solid var(--hairline-strong);
   padding-top: 24px;
